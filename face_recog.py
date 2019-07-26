@@ -38,7 +38,7 @@ while True:
     # Capture frame-by-frame
     ret, frame = video_capture.read()
     
-    small_frame = cv2.resize(frame, (0, 0), fx=1.00, fy=1.00)
+    small_frame = cv2.resize(frame, (0, 0), fx=0.2, fy=0.2)
 
     gray = cv2.cvtColor(small_frame, cv2.COLOR_BGR2GRAY)
 
@@ -65,18 +65,18 @@ while True:
             if(len(face_recognition.face_encodings(image1)) > 0):
                 encoding_1 = face_recognition.face_encodings(image1)[0]
                 encoding_2 = face_recognition.face_encodings(image2)[0]
-                results_Ritik = face_recognition.compare_faces([encoding_1], encoding_2,tolerance=0.70)
+                results_Ritik = face_recognition.compare_faces([encoding_1], encoding_2,tolerance=0.50)
                 if ((results_Ritik[0] == True) and (Ritik_came == False)):
                     Ritik_came = True
                     mytext = 'Welcome Mr. Ritik Raina'
-                    language = 'en'
+                    language = 'ar'
                     myobj = gTTS(text=mytext, lang=language, slow=False)
                     myobj.save("welcome.mp3")
                     mixer.init()
                     mixer.music.load('/Users/rraina/Desktop/INTERNSHIP 2019/FacialReg/welcome.mp3')
                     mixer.music.play()
                     said = False
-    said = True            
+    said = True         
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
